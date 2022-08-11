@@ -1,15 +1,12 @@
 package com.company;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Pedagog {
-    String pedagogID;
-    String emri;
-    String mbiemri;
-    Date pedagogDatelindja;
+   private String pedagogID;
+    private String emri;
+    private String mbiemri;
+    private Date pedagogDatelindja;
 
     public Pedagog(String pedagogID,String emri,String mbiemri,Date dtl ){
         this.pedagogID=pedagogID;
@@ -17,6 +14,7 @@ public class Pedagog {
         this.mbiemri=mbiemri;
         this.pedagogDatelindja=dtl;
     }
+    public Pedagog(){}
     public String getPedagogID(){return pedagogID;}
     public String getEmri(){return  emri;}
     public String getMbiemri(){return mbiemri;}
@@ -38,5 +36,29 @@ public class Pedagog {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    public static Pedagog PedagogInfo(String pedagogID){
+        String query="SELECT* FROM Pedagog WHERE Pedagog_ID=?";
+        String pId,pErmi,pMbiemri;
+        Date ditl;
+        Pedagog pedagog=new Pedagog();
+        try {
+          Connection connection=Main.connect();
+          PreparedStatement p= connection.prepareStatement(query);
+          p.setString(1,pedagogID);
+          p.executeQuery();
+            ResultSet rs=p.getResultSet();
+            while(rs.next()){
+                pId=rs.getString("Pedagog_ID");
+                pErmi=rs.getString("Pedagog_Emer");
+                pMbiemri=rs.getString("Pedagog_Mbiemer");
+                ditl=rs.getDate("Pedagog_Datelindja");
+                pedagog=new Pedagog(pId,pErmi,pMbiemri,ditl);
+            }rs.close();
+            connection.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return pedagog;
     }
 }

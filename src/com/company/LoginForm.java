@@ -59,6 +59,12 @@ public class LoginForm extends JFrame{
                         s.setVisible(true);
                         dispose();
                     }
+                    else if(Account.logIn(accID2,pass2) && accID2.startsWith("P")){
+                        PedagogForm p=new PedagogForm();
+                        p.accID=accID2;
+                        p.setVisible(true);
+                        dispose();
+                    }
                     else{
                         JOptionPane.showMessageDialog(null,"Wrong AcountID/Password");
                         textField.setText("");

@@ -75,13 +75,13 @@ public class Account {
         String updatePass="UPDATE acount SET PAsword=? WHERE Acount_ID=? AND Pasword=?;";
         try{
             Connection connection=Main.connect();
-            PreparedStatement p,p1;
-            p1 =connection.prepareStatement(updatePass);
-            p1.setString(1,neew);
-            p1.setString(2,id);
-            p1.setString(3,old);
+            PreparedStatement p;
+            p =connection.prepareStatement(updatePass);
+            p.setString(1,neew);
+            p.setString(2,id);
+            p.setString(3,old);
 
-            if(p1.executeUpdate()==0)
+            if(p.executeUpdate()==0)
                 return false;
             connection.close();
             }catch (Exception e){
