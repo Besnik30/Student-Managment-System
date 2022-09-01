@@ -60,7 +60,7 @@ public class LoginForm extends JFrame{
                         dispose();
                     }
                     else if(Account.logIn(accID2,pass2) && accID2.startsWith("P")){
-                        PedagogForm p=new PedagogForm();
+                        ProfessorForm p=new ProfessorForm();
                         p.accID=accID2;
                         p.setVisible(true);
                         dispose();

@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class Frekuentime {
+public class Attendance {
 
-    public static boolean ktheFrekuentimin(String Student_ID,Object lenda){
+    public static boolean getAttendace(String Student_ID, Object lenda){
         String query="SELECT Statusi\n" +
                 "FROM Frekuentime AS f\n" +
                 "JOIN Lenda AS l\n" +

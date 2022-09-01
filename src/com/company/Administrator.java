@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Administrator {
 
-    public static Object[][] ktheProvimet(String DegaID,String StudentID){
-        String query=new String("SELECT p.Dega_ID,p.Viti,p.Lenda_ID,l.Lenda_Emri,p.Sezon_ID,p.Data_Provimit,p.Ora,p.Salla\n" +
+    public static Object[][] getFinals(String DegaID, String StudentID){
+        String query=("SELECT p.Dega_ID,p.Viti,p.Lenda_ID,l.Lenda_Emri,p.Sezon_ID,p.Data_Provimit,p.Ora,p.Salla\n" +
                 "FROM Provime AS p\n" +
                 "JOIN regjistrime AS r\n" +
                 "  ON p.Lenda_ID=r.Lenda_ID\n" +
@@ -46,17 +46,17 @@ public class Administrator {
         }catch (Exception e){
             e.printStackTrace();
         }
-        Object[][] provime=new Object[liste.size()/6][6];
+        Object[][] finals=new Object[liste.size()/6][6];
 
-        for(int i=0;i<provime.length;i++){
-            for(int j=0;j<provime[i].length;j++){
-                provime[i][j]=liste.get(i).get(j);
+        for(int i=0;i<finals.length;i++){
+            for(int j=0;j<finals[i].length;j++){
+                finals[i][j]=liste.get(i).get(j);
             }
         }
-        return provime;
+        return finals;
     }
 
-    public static String[] ktheProvimeID(String degaID,int viti){
+    public static String[] getFinalsID(String courseID, int year){
         String query="SELECT Lenda_ID\n" +
                 "FROM Provime \n" +
                 "WHERE Dega_ID=? AND viti=?";
@@ -65,8 +65,8 @@ public class Administrator {
         try {
             Connection connection = Main.connect();
             PreparedStatement p = connection.prepareStatement(query);
-            p.setString(1, degaID);
-            p.setInt(2, viti);
+            p.setString(1, courseID);
+            p.setInt(2, year);
             p.executeQuery();
             ResultSet rs = p.getResultSet();
 

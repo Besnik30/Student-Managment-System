@@ -5,25 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class Regjistrime {
+public class FinalsRegistration {
 
-    public static void shtoRegjistrim(Student s,Object lenda) {
+    public static void addRegistration(Student s, Object subject) {
         String query="INSERT INTO Regjistrime(Dega_ID,Viti,Student_ID,Lenda_ID)VALUES(?,?,?,?)";
 
         try{
             Connection connection=Main.connect();
             PreparedStatement p=connection.prepareStatement(query);
-            p.setString(1,s.getDegaId());
-            p.setInt(2,s.getViti());
-            p.setString(3,s.getStuID());
-            p.setObject(4,lenda);
+            p.setString(1,s.getCourseId());
+            p.setInt(2,s.getYear());
+            p.setString(3,s.getStudentID());
+            p.setObject(4,subject);
             p.executeUpdate();
             connection.close();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-    public static boolean ktheRegjistrime(String StudentID,Object lendaID){
+    public static boolean getRegistration(String StudentID, Object subjectID){
         String query="SELECT Lenda_ID FROM Regjistrime WHERE Student_ID=?";
         ArrayList<String>list=new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class Regjistrime {
                 list.add(rs.getString("Lenda_ID"));
             }
             for(int i=0;i<list.size();i++){
-                if(list.get(i).equals(lendaID))
+                if(list.get(i).equals(subjectID))
                     return true;
             }
             rs.close();

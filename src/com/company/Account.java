@@ -4,29 +4,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Account {
-     private String account_Id;
+     private String accountId;
      private String password;
 
     public Account(){ }
     public Account (String aId,String pass){
-        this.account_Id=aId;
+        this.accountId =aId;
         this.password=pass;
     }
-    public  String getAccount_Id(){
-        return account_Id;
+    public  String getAccountId(){
+        return accountId;
     }
     public String getPassword(){
         return password;
     }
 
-    public void shtoStudentAccount(Account a){
+    public void addStudentAccount(Account a){
         String insertAccS="INSERT INTO Acount(Acount_ID,Student_ID,Pasword) VALUES(?,?,?)";
         try{
             Connection connection=Main.connect();
             PreparedStatement p;
             p = connection.prepareStatement(insertAccS);
-            p.setString(1,getAccount_Id());
-            p.setString(2,getAccount_Id());
+            p.setString(1, getAccountId());
+            p.setString(2, getAccountId());
             p.setString(3,getPassword());
             p.executeUpdate();
             connection.close();
@@ -34,14 +34,14 @@ public class Account {
                 e.printStackTrace();
             }
     }
-        public void shtoPedagogAccount(Account a){
+        public void addProfessorAccount(Account a){
             String insertAccP="INSERT INTO Acount(Acount_ID,Pedagog_ID,Pasword) VALUES(?,?,?)";
             try{
                 Connection connection=Main.connect();
                 PreparedStatement p;
                 p = connection.prepareStatement(insertAccP);
-                p.setString(1,getAccount_Id());
-                p.setString(2,getAccount_Id());
+                p.setString(1, getAccountId());
+                p.setString(2, getAccountId());
                 p.setString(3,getPassword());
                 p.executeUpdate();
                 connection.close();
@@ -50,11 +50,11 @@ public class Account {
             }
     }
     public static boolean logIn(String accID,String pass){
-        String kerkoAcc="SELECT Acount_ID,Pasword FROM Acount WHERE Acount_ID=? AND Pasword=?";
+        String findAcc="SELECT Acount_ID,Pasword FROM Acount WHERE Acount_ID=? AND Pasword=?";
         try{
             Connection connection=Main.connect();
             PreparedStatement p;
-            p=connection.prepareStatement(kerkoAcc);
+            p=connection.prepareStatement(findAcc);
             p.setString(1,accID);
             p.setString(2,pass);
             p.executeQuery();

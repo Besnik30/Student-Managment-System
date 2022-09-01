@@ -5,7 +5,7 @@ import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StudentRegjistrimForm extends JFrame {
+public class StudentRegistrationForm extends JFrame {
     JPanel panel=new JPanel();
     JButton regjistro=new JButton("Regjistrohu");
     JLabel zgjidh=new JLabel("Zgjidh Lendet: ");
@@ -14,10 +14,10 @@ public class StudentRegjistrimForm extends JFrame {
     Border border=BorderFactory.createCompoundBorder(raisedbevel, loweredbevel);
 
     Student student=Student.StudentInfo(StudentForm.accID);
-    String[]lendet=Administrator.ktheProvimeID(student.getDegaId(),student.getViti());
+    String[]lendet=Administrator.getFinalsID(student.getCourseId(),student.getYear());
     JComboBox comboBox=new JComboBox(lendet);
 
-    public StudentRegjistrimForm(){
+    public StudentRegistrationForm(){
         setSize(600,300);
         setLocation(350, 280);
         panel.setLayout(null);
@@ -30,22 +30,22 @@ public class StudentRegjistrimForm extends JFrame {
         panel.add(comboBox);
         getContentPane().add(panel);
         setVisible(true);
-        Regjistrim();
+        Register();
 
     }
-    public void Regjistrim(){
+    public void Register(){
         regjistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Object lendaID=comboBox.getSelectedItem();
-                if (Frekuentime.ktheFrekuentimin(student.getStuID(),lendaID))
+                if (Attendance.getAttendace(student.getStudentID(),lendaID))
                     JOptionPane.showMessageDialog(null, "NUk regjistrohesh dot ne kte lende per shkak frekuentimi");
 
-                else if(Regjistrime.ktheRegjistrime(student.getStuID(),lendaID))
+                else if(FinalsRegistration.getRegistration(student.getStudentID(),lendaID))
                     JOptionPane.showMessageDialog(null, "Je rregjistuar njehere ne kte lende");
 
                 else {
-                    Regjistrime.shtoRegjistrim(student, lendaID);
+                    FinalsRegistration.addRegistration(student, lendaID);
                     JOptionPane.showMessageDialog(null, "Regjistrimi u krye me sukses");
                 }
             }

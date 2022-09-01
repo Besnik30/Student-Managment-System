@@ -5,53 +5,53 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Student {
- private String stuID;
- private String emri;
- private String mbiemri;
- private Date datelindja;
- private String degaId;
- private int viti;
+ private String studentID;
+ private String name;
+ private String surname;
+ private Date birthday;
+ private String courseId;
+ private int year;
 
  public Student(String studentId,String e,String mb,Date d,String de,int v){
-  this.stuID=studentId;
-  this.emri=e;
-  this.mbiemri=mb;
-  this.datelindja=d;
-  this.degaId=de;
-  this.viti=v;
+  this.studentID =studentId;
+  this.name =e;
+  this.surname =mb;
+  this.birthday =d;
+  this.courseId =de;
+  this.year =v;
  }
  public Student(){ }
 
- public String getEmri(){
-  return emri;
+ public String getName(){
+  return name;
  }
- public String getMbiemri(){
-  return mbiemri;
+ public String getSurname(){
+  return surname;
  }
- public Date getDatelindja(){
-  return datelindja;
+ public Date getBirthday(){
+  return birthday;
  }
- public String getDegaId(){
-  return degaId;
+ public String getCourseId(){
+  return courseId;
  }
- public int getViti(){
-  return viti;
+ public int getYear(){
+  return year;
  }
- public String getStuID(){ return stuID; }
+ public String getStudentID(){ return studentID; }
 
- public void  shtoStudent(Student stu){
+ public void addStudent(Student stu){
   String insert = "INSERT INTO Student(Student_ID,Student_Emer,Student_Mbiemer,Student_Datelindja,Dega_ID,viti) VALUES(?,?,?,?,?,?) ";
 
   try{
    Connection connection=Main.connect();
    PreparedStatement p;
    p = connection.prepareStatement(insert);
-   p.setString(1, stu.getStuID());
-   p.setString(2, stu.getEmri());
-   p.setString(3, stu.getMbiemri());
-   p.setDate(4, stu.getDatelindja());
-   p.setString(5, stu.getDegaId());
-   p.setInt(6, stu.getViti());
+   p.setString(1, stu.getStudentID());
+   p.setString(2, stu.getName());
+   p.setString(3, stu.getSurname());
+   p.setDate(4, stu.getBirthday());
+   p.setString(5, stu.getCourseId());
+   p.setInt(6, stu.getYear());
    p.executeUpdate();
   } catch (Exception e) {
    e.printStackTrace();

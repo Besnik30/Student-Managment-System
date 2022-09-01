@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class Dega {
+public class Course {
 
-    public static String[] getDegId(){
+    public static String[] getCourseID(){
         ArrayList<String>l=new ArrayList<String>();
         String querry="SELECT* FROM DEGA";
         try {

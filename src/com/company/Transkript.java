@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Transkript {
 
-    public static Object[][] ktheTranskript(String id){
+    public static Object[][] getTranscript(String id){
         String querry="SELECT Sezon_ID,Lenda_Emri,Nota\n" +
                 "FROM Transkript AS t\n" +
                 "JOIN Dega AS d\n" +

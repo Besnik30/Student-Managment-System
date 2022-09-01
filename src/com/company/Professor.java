@@ -2,46 +2,46 @@ package com.company;
 
 import java.sql.*;
 
-public class Pedagog {
-   private String pedagogID;
-    private String emri;
-    private String mbiemri;
-    private Date pedagogDatelindja;
+public class Professor {
+   private String professorID;
+    private String P_Name;
+    private String P_LastName;
+    private Date P_Birthday;
 
-    public Pedagog(String pedagogID,String emri,String mbiemri,Date dtl ){
-        this.pedagogID=pedagogID;
-        this.emri=emri;
-        this.mbiemri=mbiemri;
-        this.pedagogDatelindja=dtl;
+    public Professor(String professorID, String name, String lastName, Date bDay ){
+        this.professorID = professorID;
+        this.P_Name=name;
+        this.P_LastName =lastName;
+        this.P_Birthday =bDay;
     }
-    public Pedagog(){}
-    public String getPedagogID(){return pedagogID;}
-    public String getEmri(){return  emri;}
-    public String getMbiemri(){return mbiemri;}
-    public Date getPedagogDatelindja(){return pedagogDatelindja;}
+    public Professor(){}
+    public String getProfessorID(){return professorID;}
+    public String getP_Name(){return  P_Name;}
+    public String getMbiemri(){return P_LastName;}
+    public Date getP_Birthday(){return P_Birthday;}
 
-    public void shtoPedagog(Pedagog a){
+    public void addProfessor(Professor a){
         String insertPedagog="INSERT INTO Pedagog(Pedagog_ID,Pedagog_Emer,Pedagog_Mbiemer,Pedagog_Datelindja) VALUES(?,?,?,?)";
         try {
             Connection connection = Main.connect();
             PreparedStatement p;
             PreparedStatement p1;
             p = connection.prepareStatement(insertPedagog);
-            p.setString(1, a.getPedagogID());
-            p.setString(2, a.getEmri());
+            p.setString(1, a.getProfessorID());
+            p.setString(2, a.getP_Name());
             p.setString(3, a.getMbiemri());
-            p.setDate(4, a.getPedagogDatelindja());
+            p.setDate(4, a.getP_Birthday());
             p.executeUpdate();
             connection.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
     }
-    public static Pedagog PedagogInfo(String pedagogID){
+    public static Professor ProfessorInfo(String pedagogID){
         String query="SELECT* FROM Pedagog WHERE Pedagog_ID=?";
         String pId,pErmi,pMbiemri;
         Date ditl;
-        Pedagog pedagog=new Pedagog();
+        Professor professor =new Professor();
         try {
           Connection connection=Main.connect();
           PreparedStatement p= connection.prepareStatement(query);
@@ -53,12 +53,12 @@ public class Pedagog {
                 pErmi=rs.getString("Pedagog_Emer");
                 pMbiemri=rs.getString("Pedagog_Mbiemer");
                 ditl=rs.getDate("Pedagog_Datelindja");
-                pedagog=new Pedagog(pId,pErmi,pMbiemri,ditl);
+                professor =new Professor(pId,pErmi,pMbiemri,ditl);
             }rs.close();
             connection.close();
         }catch (Exception e){
             e.printStackTrace();
         }
-        return pedagog;
+        return professor;
     }
 }

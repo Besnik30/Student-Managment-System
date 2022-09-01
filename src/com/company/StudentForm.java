@@ -144,19 +144,19 @@ public class StudentForm extends JFrame {
                 password.setText("Password :"+pass);
                 emptyPanel.add(emri);
                 emri.setBorder(blackline);
-                emri.setText("Emri :"+s.getEmri());
+                emri.setText("Emri :"+s.getName());
                 emptyPanel.add(mbiemri);
                 mbiemri.setBorder(blackline);
-                mbiemri.setText("Mbiemri :"+s.getMbiemri());
+                mbiemri.setText("Mbiemri :"+s.getSurname());
                 emptyPanel.add(datelindja);
                 datelindja.setBorder(blackline);
-                datelindja.setText("Datelindja :"+s.getDatelindja());
+                datelindja.setText("Datelindja :"+s.getBirthday());
                 emptyPanel.add(dega);
                 dega.setBorder(blackline);
-                dega.setText("Dega :"+s.getDegaId());
+                dega.setText("Dega :"+s.getCourseId());
                 emptyPanel.add(viti);
                 viti.setBorder(blackline);
-                viti.setText("Viti :"+s.getViti());
+                viti.setText("Viti :"+s.getYear());
                 passChange.setVisible(false);
                 orariPanel.setVisible(false);
                 getContentPane().add(emptyPanel);
@@ -221,7 +221,7 @@ public class StudentForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Student s1=Student.StudentInfo(accID);
                 String[] columnName1={"Lenda","P.Emri","P.Mbiemri","MesimDhenia","Dita","Ora","Salla"};
-                Object[][] data1=Orari.ktheOrarin(s1.getViti(),s1.getDegaId());
+                Object[][] data1= Timetable.getTimetable(s1.getYear(),s1.getCourseId());
                 JTable orariTabela = new JTable(data1,columnName1);
                 orariTabela.getColumnModel().getColumn(0).setPreferredWidth(150);
                 orariTabela.getColumnModel().getColumn(3).setPreferredWidth(150);
@@ -250,7 +250,7 @@ public class StudentForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[]columnName2={"Sezoni","Emri i Lendes","Nota"};
-                Object[][]data2=Transkript.ktheTranskript(accID);
+                Object[][]data2=Transkript.getTranscript(accID);
                 JTable transkript=new JTable(data2,columnName2);
                 transkript.setFillsViewportHeight(true);
                 JScrollPane scrollpane = new JScrollPane(transkript);
@@ -274,7 +274,7 @@ public class StudentForm extends JFrame {
         regjistrim.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StudentRegjistrimForm sr=new StudentRegjistrimForm();
+                StudentRegistrationForm sr=new StudentRegistrationForm();
                 sr.setVisible(true);
             }
         });
@@ -283,8 +283,8 @@ public class StudentForm extends JFrame {
         shfaq.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProvimeTableForm provimeTableForm=new ProvimeTableForm();
-                provimeTableForm.setVisible(true);
+                FinalsTableForm finalsTableForm =new FinalsTableForm();
+                finalsTableForm.setVisible(true);
             }
         });
     }

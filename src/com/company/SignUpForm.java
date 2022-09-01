@@ -37,7 +37,7 @@ public class SignUpForm extends JFrame {
     JLabel viti=new JLabel("Viti: ");
     JLabel dega=new JLabel("Dega: ");
 
-    String[] deget=Dega.getDegId();
+    String[] deget= Course.getCourseID();
     JComboBox comboBox=new JComboBox(deget);
 
     JTextField textField1=new JTextField(20);
@@ -202,8 +202,8 @@ public class SignUpForm extends JFrame {
                     if(sid.startsWith("S")){
                         Student s=new Student(sid,emr,mb,dat2,deg2,vit2);
                         Account a=new Account(sid,pass);
-                        s.shtoStudent(s);
-                        a.shtoStudentAccount(a);
+                        s.addStudent(s);
+                        a.addStudentAccount(a);
                         FirstForm f=new FirstForm();
                         f.setVisible(true);
                         dispose();
@@ -240,10 +240,10 @@ public class SignUpForm extends JFrame {
                         Date dat2=Date.valueOf(dat);
 
                         if(pId.startsWith("P")){
-                            Pedagog p=new Pedagog(pId,emr,mb,dat2);
+                            Professor p=new Professor(pId,emr,mb,dat2);
                             Account a=new Account(pId,pass);
-                            p.shtoPedagog(p);
-                            a.shtoPedagogAccount(a);
+                            p.addProfessor(p);
+                            a.addProfessorAccount(a);
                             FirstForm f=new FirstForm();
                             f.setVisible(true);
                             dispose();
