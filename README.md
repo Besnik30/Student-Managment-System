@@ -11,6 +11,4 @@ Screenshoots
   <img src="https://github.com/Besnik30/Student-Managment-System/blob/main/screenshoot/Screenshot%202022-08-09%20191621.png"/>
   <img src="https://github.com/Besnik30/Student-Managment-System/blob/main/screenshoot/Screenshot%202022-08-09%20191752.png"/>
   <img src="https://github.com/Besnik30/Student-Managment-System/blob/main/screenshoot/Screenshot%202022-08-09%20191823.png"/>
-  <img src="https://github.com/Besnik30/Student-Managment-System/blob/main/screenshoot/Screenshot%2022-11-23%105118.png"/>
- 
 </p>
